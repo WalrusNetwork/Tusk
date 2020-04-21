@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <artifactId>nerve</artifactId>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+  </build>
+
+  <description>Backend connectivity code and services.</description>
+  <modelVersion>4.0.0</modelVersion>
+  <modules>
+    <!-- Core API services usable anywhere -->
+    <module>core</module>
+    <!-- Bukkit-specific APIs/Implementations -->
+    <module>bukkit</module>
+    <!-- Bungee-specific APIs/Implementations -->
+    <module>bungee</module>
+  </modules>
+
+  <packaging>pom</packaging>
+
+  <parent>
+    <artifactId>WalrusNetwork</artifactId>
+    <groupId>network.walrus</groupId>
+    <relativePath>../pom.xml</relativePath>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+
+  <properties>
+    <!-- Bukkit/Bungee plugin name -->
+    <plugin.name>Nerve</plugin.name>
+    <!-- The prefix to use when logging to the console -->
+    <plugin.prefix>Nerve</plugin.prefix>
+    <!-- Use UTF-8 during compilation -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+</project>

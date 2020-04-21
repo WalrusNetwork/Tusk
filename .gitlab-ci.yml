@@ -1,0 +1,58 @@
+variables:
+  REGISTRY: gcr.io/walrus-network
+  MAVEN_CLI_OPTS: "-s .m2/settings.xml --batch-mode"
+  MAVEN_OPTS: "-Dmaven.repo.local=/data/.m2/repository"
+stages:
+  - maven
+  - docker
+
+maven:
+  image: openjdk:8-jdk-alpine
+  stage: maven
+  artifacts:
+    paths:
+      - jars
+  before_script:
+    - apk add patch make ca-certificates openssl python maven --update
+    # Install CA certs, openssl to https downloads, python for gcloud sdk
+    - update-ca-certificates
+    # Write our GCP service account private key into a file
+    - export GOOGLE_APPLICATION_CREDENTIALS=$GCLOUD_SERVICE_KEY
+    # Download and install Google Cloud SDK
+    - wget https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz
+    - tar zxvf google-cloud-sdk.tar.gz && ./google-cloud-sdk/install.sh --usage-reporting=false --path-update=true
+    - google-cloud-sdk/bin/gcloud --quiet components update
+    - google-cloud-sdk/bin/gcloud auth activate-service-account --key-file $GCLOUD_SERVICE_KEY
+    - google-cloud-sdk/bin/gcloud config set project walrus-network
+  script:
+    - mvn $MAVEN_CLI_OPTS compile
+    - mvn $MAVEN_CLI_OPTS deploy
+    - sh populate.sh
+  only:
+    - master
+  retry:
+    max: 2
+    when: stuck_or_timeout_failure
+
+docker:
+  image: docker:latest
+  stage: docker
+  dependencies:
+    - maven
+  services:
+    - docker:dind
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
+  before_script:
+    - docker login -u _json_key --password-stdin https://gcr.io < $GCLOUD_SERVICE_KEY
+  script:
+    - docker build -t minecraft:base --build-arg CI_JOB_TOKEN .
+    - docker build -f Dockerfile-bukkit -t $REGISTRY/minecraft/bukkit-$CI_COMMIT_REF_SLUG --build-arg CI_JOB_TOKEN .
+    - docker build -f Dockerfile-bungee -t $REGISTRY/minecraft/bungee-$CI_COMMIT_REF_SLUG --build-arg CI_JOB_TOKEN .
+    - docker push $REGISTRY/minecraft/bukkit-$CI_COMMIT_REF_SLUG
+    - docker push $REGISTRY/minecraft/bungee-$CI_COMMIT_REF_SLUG
+  only:
+    - master
+  retry:
+    max: 2
+    when: script_failure

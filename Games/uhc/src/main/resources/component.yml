@@ -1,0 +1,4 @@
+# Component name - for logging
+name: UHC
+# Main class for this component - must extend ExternalComponent
+main: network.walrus.games.uhc.UHCManager

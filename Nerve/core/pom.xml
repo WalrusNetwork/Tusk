@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <artifactId>nerve-core</artifactId>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-shade-plugin</artifactId>
+        <executions>
+          <execution>
+            <configuration>
+              <artifactSet>
+                <includes>
+                  <include>network.walrus:utilities-core</include>
+                  <include>biz.paluch.redis:lettuce</include>
+                  <include>com.shopify.graphql.support:support</include>
+                  <include>com.google.http-client:google-http-client</include>
+                  <include>com.google.http-client:google-http-client-gson</include>
+                </includes>
+              </artifactSet>
+            </configuration>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <phase>package</phase>
+          </execution>
+        </executions>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>2.1</version>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <artifactId>utilities-core</artifactId>
+      <groupId>network.walrus</groupId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>javaapiclient</artifactId>
+      <groupId>gg.walrus</groupId>
+      <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+    <!-- Google HTTP Client -->
+    <dependency>
+      <artifactId>google-http-client</artifactId>
+      <groupId>com.google.http-client</groupId>
+    </dependency>
+    <!-- Google GSON -->
+    <dependency>
+      <artifactId>google-http-client-gson</artifactId>
+      <groupId>com.google.http-client</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>support</artifactId>
+      <groupId>com.shopify.graphql.support</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>lettuce</artifactId>
+      <classifier>shaded</classifier>
+      <groupId>biz.paluch.redis</groupId>
+    </dependency>
+  </dependencies>
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <artifactId>nerve</artifactId>
+    <groupId>network.walrus</groupId>
+    <relativePath>../pom.xml</relativePath>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+</project>

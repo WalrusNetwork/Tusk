@@ -1,0 +1,6 @@
+name: ${plugin.name}
+main: ${plugin.mainClass}
+version: ${project.version}-${git.commit.id.abbrev}
+description: ${description}
+author: Walrus Network
+depends: [Nerve]

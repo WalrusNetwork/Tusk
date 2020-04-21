@@ -1,0 +1,5 @@
+Copyright Walrus LLC 2020
+
+Different parts of this codebase are licensed under different terms, so please pay close attention to this document.
+
+This codebase incorporates code licensed by the Overcast Network under the terms of the AGPL license. Those files include but are not limited to files tagged with `@author OvercastNetwork`. The remaining codebase is licensed under the Apache 2.0 license. Copies of both of these licenses are included in this repository as `LICENSE-AGPL` and `LICENSE-Apache` respectively. If you want to stay safe, stick with the AGPL terms but as is the case in both licenses, this code is provided AS-IS with no warranty whatsoever.

@@ -1,0 +1,20 @@
+# ${plugin.name} Main Configuration
+# ${plugin.name} - ${description}
+
+###########################################################################
+##                        ENVIRONMENT INFORMATION                        ##
+##    This is to make life easier since we have multiple environments    ##
+##                                                                       ##
+##   Scope: "" (scope [tm/lobby/etc] of servers where                    ##
+##              this config is used)                                     ##
+##                                                                       ##
+##   Production: true (Active on production servers)                     ##
+##                                                                       ##
+##   Complete: true (if the file is a full configuration.                ##
+##                    If false, parent/children configs are needed)      ##
+##                                                                       ##
+##   Notes: Any special notes about this file                            ##
+##          Ex: Children need to define "foo" in order                   ##
+##              for the file to be complete.                             ##
+##                                                                       ##
+###########################################################################

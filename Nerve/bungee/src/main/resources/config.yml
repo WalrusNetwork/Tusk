@@ -1,0 +1,38 @@
+# ${plugin.name} Main Configuration
+# ${plugin.name} - ${description}
+
+###########################################################################
+##                        ENVIRONMENT INFORMATION                        ##
+##    This is to make life easier since we have multiple environments    ##
+##                                                                       ##
+##   Scope: "" (scope [tm/lobby/etc] of servers where                    ##
+##              this config is used)                                     ##
+##                                                                       ##
+##   Production: true (Active on production servers)                     ##
+##                                                                       ##
+##   Complete: true (if the file is a full configuration.                ##
+##                    If false, parent/children configs are needed)      ##
+##                                                                       ##
+##   Notes: Any special notes about this file                            ##
+##          Ex: Children need to define "foo" in order                   ##
+##              for the file to be complete.                             ##
+##                                                                       ##
+###########################################################################
+
+api: # API Configuration
+  enabled: true # If an actual API connection should be made. If false, fake data will be returned and nothing will be saved
+  host: "localhost:3000" # Host of the API
+  key: "xyzxx" # API Key to use
+  threads: 2 # Number of threads to use for handling API requests
+  retries: 10 # Number of times to retry a failed request
+  timeouts: # HTTP timeout configuration
+    connect: 10000 # Initial connection timeout
+    read: 10000 # Read timeout
+
+redis: # Redis configuration
+  enabled: true # If an actual Redis connection should be made. If false, the publication listener will not be registered and all getters/setters will do nothing
+  host: localhost # Redis hostname
+  port: 6379 # Redis port
+  password: lol # Redis password - Omit this key to disable password
+  db: 1 # Database to use
+  threads: 2 # Number of threads to use when handling pub/sub messages

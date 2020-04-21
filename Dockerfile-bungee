@@ -1,0 +1,9 @@
+FROM minecraft:base
+
+RUN rm -rf /jars/bukkit
+
+ENV OPTS="-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -XshowSettings:vm -XX:MaxRAMFraction=1 -XX:+AggressiveOpts -XX:+AlwaysPreTouch -XX:+OptimizeStringConcat -XX:+UseStringDeduplication -XX:+UseCompressedOops -XX:TargetSurvivorRatio=90 -XX:InitiatingHeapOccupancyPercent=10 -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:+CMSIncrementalPacing -XX:ParallelGCThreads=2 -XX:+DisableExplicitGC -XX:+UseAdaptiveGCBoundary -Xnoclassgc"
+
+RUN cp /jars/bungee.jar .
+CMD ruby run.rb "$DATA" && \
+    exec java $OPTS -jar bungee.jar

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <artifactId>utilities-parsing</artifactId>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-shade-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <phase>package</phase>
+          </execution>
+        </executions>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>2.1</version>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <artifactId>utilities-bukkit</artifactId>
+      <groupId>network.walrus</groupId>
+      <scope>compile</scope>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>intake-bukkit</artifactId>
+      <groupId>app.ashcon.intake</groupId>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <artifactId>utilities</artifactId>
+    <groupId>network.walrus</groupId>
+    <relativePath>../pom.xml</relativePath>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+</project>

@@ -1,0 +1,35 @@
+# ${plugin.name} Main Configuration
+# ${plugin.name} - ${description}
+
+###########################################################################
+##                        ENVIRONMENT INFORMATION                        ##
+##    This is to make life easier since we have multiple environments    ##
+##                                                                       ##
+##   Scope: "" (scope [tm/lobby/etc] of servers where                    ##
+##              this config is used)                                     ##
+##                                                                       ##
+##   Production: true (Active on production servers)                     ##
+##                                                                       ##
+##   Complete: true (if the file is a full configuration.                ##
+##                    If false, parent/children configs are needed)      ##
+##                                                                       ##
+##   Notes: Any special notes about this file                            ##
+##          Ex: Children need to define "foo" in order                   ##
+##              for the file to be complete.                             ##
+##                                                                       ##
+###########################################################################
+
+locales-path: /home/fortnite/
+ui-path: /home/epic-games/pubg
+chat:
+  # Domains not affected by the IP filter (case insensitive)
+  allowed-domains:
+    - "google.com"
+    - "walrus.network"
+    - "walrus.gg"
+  # Words which are always filtered
+  super-bad-words:
+    - "cunt"
+  # Words filtered for players who have clean chat on
+  bad-words:
+    - "fuck"

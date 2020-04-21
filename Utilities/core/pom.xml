@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <artifactId>utilities-core</artifactId>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-shade-plugin</artifactId>
+        <executions>
+          <execution>
+            <configuration>
+              <artifactSet>
+                <includes>
+                  <include>org.jdom:jdom2</include>
+                  <include>com.google.dagger:dagger</include>
+                  <include>com.google.code.findbugs:annotations</include>
+                  <include>commons-collections:commons-collections</include>
+                  <include>org.apache.commons:commons-lang3</include>
+                  <include>org.ocpsoft.prettytime:prettytime</include>
+
+                </includes>
+              </artifactSet>
+            </configuration>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <phase>package</phase>
+          </execution>
+        </executions>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>2.1</version>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <artifactId>guava</artifactId>
+      <groupId>com.google.guava</groupId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <artifactId>annotations</artifactId>
+      <groupId>com.google.code.findbugs</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>commons-lang3</artifactId>
+      <groupId>org.apache.commons</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>commons-collections</artifactId>
+      <groupId>commons-collections</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>jdom2</artifactId>
+      <groupId>org.jdom</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>prettytime</artifactId>
+      <groupId>org.ocpsoft.prettytime</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>common</artifactId>
+      <groupId>network.walrus</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>glymur-chat</artifactId>
+      <groupId>io.github.waterfallmc</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>intake-core</artifactId>
+      <groupId>app.ashcon.intake</groupId>
+    </dependency>
+  </dependencies>
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <artifactId>utilities</artifactId>
+    <groupId>network.walrus</groupId>
+    <relativePath>../pom.xml</relativePath>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+</project>

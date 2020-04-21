@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <artifactId>ubiquitous-bukkit</artifactId>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-shade-plugin</artifactId>
+        <executions>
+          <execution>
+            <configuration>
+              <artifactSet>
+                <includes>
+                  <include>network.walrus:ubiquitous-core</include>
+                  <include>network.walrus:utilities-parsing</include>
+                  <include>com.keenant:tabbed</include>
+                </includes>
+              </artifactSet>
+            </configuration>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <phase>package</phase>
+          </execution>
+        </executions>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>2.1</version>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <artifactId>ubiquitous-core</artifactId>
+      <groupId>network.walrus</groupId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>nerve-bukkit</artifactId>
+      <groupId>network.walrus</groupId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>sportpaper-api</artifactId>
+      <groupId>network.walrus</groupId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <artifactId>utilities-parsing</artifactId>
+      <groupId>network.walrus</groupId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>viaversion-common</artifactId>
+      <groupId>us.myles</groupId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <artifactId>ProtocolLib</artifactId>
+      <groupId>com.comphenix.protocol</groupId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <artifactId>tabbed</artifactId>
+      <groupId>com.keenant</groupId>
+    </dependency>
+  </dependencies>
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <artifactId>ubiquitous</artifactId>
+    <groupId>network.walrus</groupId>
+    <relativePath>../pom.xml</relativePath>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+
+  <properties>
+    <!-- The main class -->
+    <plugin.mainClass>network.walrus.ubiquitous.bukkit.UbiquitousBukkitPlugin</plugin.mainClass>
+  </properties>
+</project>

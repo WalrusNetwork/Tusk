@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <artifactId>tournament</artifactId>
+
+  <dependencies>
+    <dependency>
+      <artifactId>ubiquitous-bukkit</artifactId>
+      <groupId>network.walrus</groupId>
+      <scope>compile</scope>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+
+  <description>Manager for tournament-related matches.</description>
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <artifactId>WalrusNetwork</artifactId>
+    <groupId>network.walrus</groupId>
+    <relativePath>../pom.xml</relativePath>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+
+  <properties>
+    <!-- Bukkit plugin name -->
+    <plugin.mainClass>network.walrus.tournament.TournamentPlugin</plugin.mainClass>
+    <!-- The prefix to use when logging to the console -->
+    <plugin.name>Tournament</plugin.name>
+    <!-- The main class -->
+    <plugin.prefix>TM</plugin.prefix>
+  </properties>
+</project>

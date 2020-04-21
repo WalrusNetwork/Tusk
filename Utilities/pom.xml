@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <artifactId>utilities</artifactId>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+  </build>
+
+  <modelVersion>4.0.0</modelVersion>
+  <modules>
+    <!-- Core functionality with only java dependencies -->
+    <module>core</module>
+    <!-- Code written around Bungee APIs -->
+    <module>bungee</module>
+    <!-- Code written around Bukkit APIs -->
+    <module>bukkit</module>
+    <!-- Code for parsing -->
+    <module>parsing</module>
+  </modules>
+
+  <packaging>pom</packaging>
+
+  <parent>
+    <artifactId>WalrusNetwork</artifactId>
+    <groupId>network.walrus</groupId>
+    <relativePath>../pom.xml</relativePath>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+</project>

@@ -1,0 +1,310 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <artifactId>WalrusNetwork</artifactId>
+
+  <build>
+    <extensions>
+      <extension>
+        <artifactId>google-storage-wagon</artifactId>
+        <groupId>com.gkatzioura.maven.cloud</groupId>
+        <version>1.0</version>
+      </extension>
+    </extensions>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <compilerArguments>
+            <!-- HACK: Resolves rare Java 8 issue -->
+            <bootclasspath>${java.home}/lib/rt.jar</bootclasspath>
+          </compilerArguments>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+        <groupId>org.apache.maven.plugins</groupId>
+        <inherited>true</inherited>
+        <version>3.6.1</version>
+      </plugin>
+      <plugin>
+        <artifactId>maven-shade-plugin</artifactId>
+        <configuration>
+          <createDependencyReducedPom>false</createDependencyReducedPom>
+        </configuration>
+        <groupId>org.apache.maven.plugins</groupId>
+        <inherited>true</inherited>
+        <version>2.1</version>
+      </plugin>
+      <plugin>
+        <artifactId>buildnumber-maven-plugin</artifactId>
+        <configuration>
+          <timestampPropertyName>build.timestamp</timestampPropertyName>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>create-timestamp</goal>
+            </goals>
+            <phase>validate</phase>
+          </execution>
+        </executions>
+        <groupId>org.codehaus.mojo</groupId>
+        <version>1.4</version>
+      </plugin>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <!-- For Bukkit tests -->
+          <workingDirectory>${basedir}/target/test-server</workingDirectory>
+        </configuration>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>2.19.1</version>
+      </plugin>
+      <plugin>
+        <artifactId>git-commit-id-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>revision</goal>
+            </goals>
+          </execution>
+        </executions>
+        <groupId>pl.project13.maven</groupId>
+        <version>2.1.0</version>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- Global -->
+
+      <!-- API -->
+      <dependency>
+        <artifactId>support</artifactId>
+        <groupId>com.shopify.graphql.support</groupId>
+        <version>0.1.1</version>
+      </dependency>
+      <!-- Google HTTP Client -->
+      <dependency>
+        <artifactId>google-http-client</artifactId>
+        <groupId>com.google.http-client</groupId>
+        <version>1.27.0</version>
+      </dependency>
+      <!-- Google GSON -->
+      <dependency>
+        <artifactId>google-http-client-gson</artifactId>
+        <groupId>com.google.http-client</groupId>
+        <version>1.27.0</version>
+      </dependency>
+      <!-- Redis -->
+      <!-- Any version above this removes netty 4.0 support, which breaks Bukkit -->
+      <dependency>
+        <artifactId>lettuce</artifactId>
+        <classifier>shaded</classifier>
+        <exclusions>
+          <exclusion>
+            <artifactId>netty-common</artifactId>
+            <groupId>io.netty</groupId>
+          </exclusion>
+          <exclusion>
+            <artifactId>netty-transport</artifactId>
+            <groupId>io.netty</groupId>
+          </exclusion>
+          <exclusion>
+            <artifactId>guava</artifactId>
+            <groupId>com.google.guava</groupId>
+          </exclusion>
+          <exclusion>
+            <artifactId>commons-pool2</artifactId>
+            <groupId>org.apache.commons</groupId>
+          </exclusion>
+        </exclusions>
+        <groupId>biz.paluch.redis</groupId>
+        <version>4.3.1.Final</version>
+      </dependency>
+      <!-- @Nullable and such -->
+      <dependency>
+        <artifactId>annotations</artifactId>
+        <groupId>com.google.code.findbugs</groupId>
+        <version>3.0.1</version>
+      </dependency>
+
+      <!-- Caching -->
+      <dependency>
+        <artifactId>guava</artifactId>
+        <groupId>com.google.guava</groupId>
+        <!-- Should match the version used in Bukkit -->
+        <version>17.0</version>
+      </dependency>
+
+      <!-- Common utils that expand on java.lang -->
+      <dependency>
+        <artifactId>commons-lang3</artifactId>
+        <groupId>org.apache.commons</groupId>
+        <version>3.8</version>
+      </dependency>
+
+      <!-- Collection utils -->
+      <dependency>
+        <artifactId>commons-collections</artifactId>
+        <groupId>commons-collections</groupId>
+        <version>3.2.2</version>
+      </dependency>
+
+      <!-- Time Formatting -->
+      <dependency>
+        <artifactId>prettytime</artifactId>
+        <groupId>org.ocpsoft.prettytime</groupId>
+        <version>4.0.2.Final</version>
+      </dependency>
+
+      <!-- XML -->
+      <dependency>
+        <artifactId>jdom2</artifactId>
+        <groupId>org.jdom</groupId>
+        <version>2.0.6</version>
+      </dependency>
+
+      <!-- Bukkit/Bungee shared -->
+      <dependency>
+        <artifactId>glymur-chat</artifactId>
+        <groupId>io.github.waterfallmc</groupId>
+        <version>1.14-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <artifactId>intake-core</artifactId>
+        <groupId>app.ashcon.intake</groupId>
+        <version>1.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <artifactId>common</artifactId>
+        <groupId>network.walrus</groupId>
+        <version>1.0-SNAPSHOT</version>
+      </dependency>
+
+      <!-- Bukkit -->
+      <dependency>
+        <artifactId>sportpaper-api</artifactId>
+        <groupId>network.walrus</groupId>
+        <version>1.8.8-R0.1-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <artifactId>sportpaper</artifactId>
+        <groupId>network.walrus</groupId>
+        <version>1.8.8-R0.1-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <artifactId>intake-bukkit</artifactId>
+        <groupId>app.ashcon.intake</groupId>
+        <version>1.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <artifactId>viaversion-common</artifactId>
+        <groupId>us.myles</groupId>
+        <version>2.0.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <artifactId>ProtocolLib</artifactId>
+        <groupId>com.comphenix.protocol</groupId>
+        <version>4.2.1</version>
+      </dependency>
+      <dependency>
+        <artifactId>tabbed</artifactId>
+        <groupId>com.keenant</groupId>
+        <version>1.8-SNAPSHOT</version>
+      </dependency>
+
+      <!-- Bungee -->
+      <dependency>
+        <artifactId>glymur-api</artifactId>
+        <groupId>io.github.waterfallmc</groupId>
+        <version>1.14-SNAPSHOT</version>
+      </dependency>
+      <!-- Only included for container creation - not shaded -->
+      <dependency>
+        <artifactId>glymur-bootstrap</artifactId>
+        <groupId>io.github.waterfallmc</groupId>
+        <version>1.14-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <artifactId>intake-bungee</artifactId>
+        <groupId>app.ashcon.intake</groupId>
+        <version>1.0-SNAPSHOT</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  <distributionManagement>
+    <repository>
+      <id>walrus-private</id>
+      <url>https://maven.walrus.gg/repository/walrus-private/</url>
+    </repository>
+    <snapshotRepository>
+      <id>walrus-private</id>
+      <url>https://maven.walrus.gg/repository/walrus-private/</url>
+    </snapshotRepository>
+  </distributionManagement>
+  <groupId>network.walrus</groupId>
+  <modelVersion>4.0.0</modelVersion>
+
+  <modules>
+    <!-- Utilities behind the API layer -->
+    <module>Utilities</module>
+    <!-- Connection to the backend -->
+    <module>Nerve</module>
+    <!-- Utilities in front of the API layer and stuff that can be used anywhere -->
+    <module>Ubiquitous</module>
+    <!-- Game management base and all games -->
+    <module>Games</module>
+    <module>Duels</module>
+    <!-- Lobby plugin -->
+    <module>WelcomeMat</module>
+    <!-- Tournament Plugin -->
+    <module>Tournament</module>
+    <!-- Custom World Gen Plugin -->
+    <module>UHCWorldGen</module>
+  </modules>
+
+  <packaging>pom</packaging>
+
+  <properties>
+    <global.version>1.0.0</global.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <!-- Keep all of the depends in one place so versioning is the same. -->
+  <repositories>
+    <repository>
+      <id>viaversion-repo</id>
+      <url>https://repo.viaversion.com</url>
+    </repository>
+    <repository>
+      <id>dmulloy2-repo</id>
+      <url>http://repo.dmulloy2.net/nexus/repository/public/</url>
+    </repository>
+    <repository>
+      <id>walrus-public</id>
+      <url>https://maven.walrus.gg/repository/walrus-public/</url>
+    </repository>
+    <repository>
+      <id>walrus-private</id>
+      <url>https://maven.walrus.gg/repository/walrus-private/</url>
+    </repository>
+    <repository>
+      <id>jcenter</id>
+      <releases>
+        <checksumPolicy>warn</checksumPolicy>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <checksumPolicy>warn</checksumPolicy>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </snapshots>
+      <url>https://jcenter.bintray.com</url>
+    </repository>
+  </repositories>
+
+  <version>1.0.0-SNAPSHOT</version>
+
+</project>

@@ -1,0 +1,8 @@
+name: ${plugin.name}
+description: ${description}
+main: ${plugin.mainClass}
+version: ${project.version}-${git.commit.id.abbrev}
+author: Walrus Network
+prefix: ${plugin.prefix}
+# isolate: true
+depend: []

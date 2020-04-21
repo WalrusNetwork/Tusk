@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <artifactId>welcome-mat</artifactId>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-shade-plugin</artifactId>
+        <executions>
+          <execution>
+            <configuration>
+              <artifactSet>
+                <includes>
+                  <include>network.walrus:utilities-parsing</include>
+                </includes>
+              </artifactSet>
+            </configuration>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <phase>package</phase>
+          </execution>
+        </executions>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>2.1</version>
+      </plugin>
+    </plugins>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <artifactId>ubiquitous-bukkit</artifactId>
+      <groupId>network.walrus</groupId>
+      <scope>compile</scope>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>utilities-parsing</artifactId>
+      <groupId>network.walrus</groupId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+  <description>Lobby plugin.</description>
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <artifactId>WalrusNetwork</artifactId>
+    <groupId>network.walrus</groupId>
+    <relativePath>../pom.xml</relativePath>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+
+  <properties>
+    <!-- Bukkit plugin name -->
+    <plugin.mainClass>network.walrus.welcomemat.WelcomeMatPlugin</plugin.mainClass>
+    <!-- The prefix to use when logging to the console -->
+    <plugin.name>WelcomeMatt</plugin.name>
+    <!-- The main class -->
+    <plugin.prefix>WelcomeMatt</plugin.prefix>
+  </properties>
+</project>
