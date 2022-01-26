@@ -15,6 +15,9 @@ dependency-reduced-pom.xml
 .idea
 *.iml
 
+# VSCode
+.vscode
+
 # Vim generated files
 *~
 *.swp

@@ -15,10 +15,11 @@
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
+          <!-- HACK: Resolves rare Java 8 issue
           <compilerArguments>
-            <!-- HACK: Resolves rare Java 8 issue -->
             <bootclasspath>${java.home}/lib/rt.jar</bootclasspath>
           </compilerArguments>
+          -->
           <source>1.8</source>
           <target>1.8</target>
         </configuration>
@@ -236,12 +237,12 @@
   </dependencyManagement>
   <distributionManagement>
     <repository>
-      <id>walrus-private</id>
-      <url>https://maven.walrus.gg/repository/walrus-private/</url>
+      <id>github</id>
+      <url>https://maven.pkg.github.com/WalrusNetwork/Tusk</url>
     </repository>
     <snapshotRepository>
-      <id>walrus-private</id>
-      <url>https://maven.walrus.gg/repository/walrus-private/</url>
+      <id>github</id>
+      <url>https://maven.pkg.github.com/WalrusNetwork/Tusk</url>
     </snapshotRepository>
   </distributionManagement>
   <groupId>network.walrus</groupId>
@@ -282,14 +283,10 @@
       <id>dmulloy2-repo</id>
       <url>http://repo.dmulloy2.net/nexus/repository/public/</url>
     </repository>
-    <repository>
-      <id>walrus-public</id>
-      <url>https://maven.walrus.gg/repository/walrus-public/</url>
-    </repository>
-    <repository>
-      <id>walrus-private</id>
-      <url>https://maven.walrus.gg/repository/walrus-private/</url>
-    </repository>
+		<repository>
+      <id>github</id>
+      <url>https://maven.pkg.github.com/WalrusNetwork/Tusk</url>
+		</repository>
     <repository>
       <id>jcenter</id>
       <releases>
